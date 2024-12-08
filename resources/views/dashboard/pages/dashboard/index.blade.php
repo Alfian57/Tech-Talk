@@ -1,15 +1,17 @@
 @extends('dashboard.layouts.main')
 
+@push('scripts')
+    <script src="/assets/dashboard/js/pages/dashboard.init.js"></script>
+@endpush
+
 @section('header')
     <div class="page-title-box">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-6">
                     <div class="page-title">
-                        <h4>Dashboard</h4>
+                        <h4>{{ $title }}</h4>
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="#">Morvin</a></li>
-                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>

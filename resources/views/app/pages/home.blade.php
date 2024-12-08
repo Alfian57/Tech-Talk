@@ -55,7 +55,7 @@
                             </svg>
                             @if ($post->is_closed)
                                 <svg class="tt-icon">
-                                    <use xlink:href="#icon-verified"></use>
+                                    <use xlink:href="#icon-locked"></use>
                                 </svg>
                             @endif
                             {{ $post->title }}
@@ -97,7 +97,7 @@
                         <a href="{{ route('posts.index', $post->id) }}">
                             @if ($post->is_closed)
                                 <svg class="tt-icon">
-                                    <use xlink:href="#icon-verified"></use>
+                                    <use xlink:href="#icon-locked"></use>
                                 </svg>
                             @endif
                             {{ $post->title }}

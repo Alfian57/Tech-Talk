@@ -1,6 +1,7 @@
 @include('dashboard.components.head')
 
 <body>
+    @include('sweetalert::alert')
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -23,8 +24,6 @@
             @include('dashboard.components.footer')
         </div>
     </div>
-
-    @include('dashboard.components.theme')
 
     <div class="rightbar-overlay"></div>
 

@@ -19,6 +19,20 @@
                         <a href="javascript:void(0);">{{ $post->user->name }}</a>
                     </div>
                     <a href="javascript:void(0);" class="tt-info-time">
+                        @if ($post->is_pinned)
+                            <i class="tt-icon">
+                                <svg>
+                                    <use xlink:href="#icon-pinned"></use>
+                                </svg>
+                            </i>
+                        @endif
+                        @if ($post->is_closed)
+                            <i class="tt-icon">
+                                <svg>
+                                    <use xlink:href="#icon-locked"></use>
+                                </svg>
+                            </i>
+                        @endif
                         <i class="tt-icon">
                             <svg>
                                 <use xlink:href="#icon-time"></use>
@@ -86,18 +100,51 @@
                     </i>
                     <span class="tt-text">Laporkan</span>
                 </a>
+                @if (!$post->is_closed && (auth()->id() === $post->user_id || auth()->user()->role === 'moderator'))
+                    <a href="javascript:void(0);" class="tt-icon-btn" wire:click="closePost">
+                        <i class="tt-icon">
+                            <svg>
+                                <use xlink:href="#icon-locked"></use>
+                            </svg>
+                        </i>
+                        <span class="tt-text">Tutup Post</span>
+                    </a>
+                @endif
+                @if (auth()->user()->role === 'moderator')
+                    <a href="javascript:void(0);" class="tt-icon-btn" wire:click="togglePinPost">
+                        <i class="tt-icon">
+                            <svg>
+                                <use xlink:href="#icon-pinned"></use>
+                            </svg>
+                        </i>
+                        <span class="tt-text">{{ $post->is_pinned ? 'Unpin Post' : 'Pin Post' }}</span>
+                    </a>
+                @endif
+                @if (auth()->id() === $post->user_id || auth()->user()->role === 'moderator')
+                    <a href="javascript:void(0);" wire:click="deletePost">
+                        <span style="color: red; margin-left: 30px; font-weight: bold;">Hapus Topik</span>
+                    </a>
+                @endif
                 <div class="col-separator"></div>
             </div>
         </div>
     </div>
 
-    <div class="tt-item p-3" style="display: flex; justify-content: center">
+    <div class="tt-item p-3" style="display: flex; justify-content: center;">
         @if ($post->is_closed)
             <span>
                 Topik ini sudah ditutup
             </span>
         @elseif(auth()->check())
-            <span>Ganti Form</span>
+            <form wire:submit.prevent="addComment" style="width: 100%;">
+                <div class="form-group" style="width: 100%;">
+                    <textarea class="form-control" rows="5" wire:model="newComment" placeholder="Tambahkan komentar..."
+                        style="width: 100%;"></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary mt-2">Kirim</button>
+                </div>
+            </form>
         @else
             <span>
                 Silahkan <a href="{{ route('login') }}">login</a> untuk memberikan komentar
@@ -110,7 +157,7 @@
             'tt-item',
             'tt-wrapper-success' => $comment->is_best,
             'mt-5' => $loop->last,
-        ])>
+        ]) @if ($comment->created_at->diffInMinutes() < 1) wire:poll.1s @endif>
             <div class="tt-single-topic">
                 <div class="tt-item-header pt-noborder">
                     <div class="tt-item-info info-top">
@@ -189,6 +236,26 @@
                         </i>
                         <span class="tt-text">Laporkan</span>
                     </a>
+                    @if (auth()->id() === $comment->user_id || auth()->user()->role === 'moderator')
+                        @if (!$comment->is_best)
+                            <a href="javascript:void(0);" wire:click="toggleAsBest('{{ $comment->id }}')">
+                                <span style="color: green; margin-left: 30px; font-weight: bold;">Jadikan Jawaban
+                                    Terbaik
+                                </span>
+                            </a>
+                        @else
+                            <a href="javascript:void(0);" wire:click="toggleAsBest('{{ $comment->id }}')">
+                                <span style="color: orange; margin-left: 30px; font-weight: bold;">Batalkan Jawaban
+                                    Terbaik
+                                </span>
+                            </a>
+                        @endif
+                    @endif
+                    @if (auth()->user()->role === 'moderator')
+                        <a href="javascript:void(0);" wire:click="deleteComment('{{ $comment->id }}')">
+                            <span style="color: red; margin-left: 30px; font-weight: bold;">Hapus Komentar</span>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

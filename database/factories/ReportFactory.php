@@ -16,22 +16,10 @@ class ReportFactory extends Factory
      */
     public function definition(): array
     {
-        if ($this->faker->boolean) {
-            return [
-                'content' => $this->faker->text,
-                'status' => $this->faker->randomElement(['opened', 'closed']),
-                'comment_id' => \App\Models\Comment::inRandomOrder()->first()->id,
-                'post_id' => null,
-                'user_id' => \App\Models\User::inRandomOrder()->first()->id,
-            ];
-        } else {
-            return [
-                'content' => $this->faker->text,
-                'status' => $this->faker->randomElement(['opened', 'closed']),
-                'comment_id' => null,
-                'post_id' => \App\Models\Post::inRandomOrder()->first()->id,
-                'user_id' => \App\Models\User::inRandomOrder()->first()->id,
-            ];
-        }
+        return [
+            'content' => $this->faker->text,
+            'status' => $this->faker->randomElement(['opened', 'closed']),
+            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+        ];
     }
 }

@@ -31,6 +31,10 @@ class PostFactory extends Factory
         return $this->afterCreating(function (\App\Models\Post $post) {
             $post->comments()->saveMany(\App\Models\Comment::factory()->count(rand(0, 5))->make());
             $post->reactions()->saveMany(\App\Models\Reaction::factory()->count(rand(5, 75))->make());
+
+            if (rand(1, 3) === 1) {
+                $post->reports()->saveMany(\App\Models\Report::factory()->count(rand(1, 3))->make());
+            }
         });
     }
 }
