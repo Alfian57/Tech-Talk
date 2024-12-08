@@ -18,7 +18,7 @@ class RoleBasedAuthMiddleware
     {
         $roles = explode('|', $roles);
 
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
         foreach ($roles as $role) {

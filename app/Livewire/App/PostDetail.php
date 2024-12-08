@@ -9,6 +9,7 @@ use Livewire\Component;
 class PostDetail extends Component
 {
     public Post $post;
+
     public string $newComment = '';
 
     public function addComment()
@@ -112,6 +113,7 @@ class PostDetail extends Component
         $this->post->save();
 
         toast('Topik berhasil ditutup.', 'success');
+
         return $this->redirect(route('posts.index', $this->post->id));
     }
 
@@ -120,15 +122,16 @@ class PostDetail extends Component
         $this->post->delete();
 
         toast('Topik berhasil dihapus.', 'success');
+
         return $this->redirect(route('home'));
     }
 
     public function togglePinPost()
     {
-        $this->post->is_pinned = !$this->post->is_pinned;
+        $this->post->is_pinned = ! $this->post->is_pinned;
         $this->post->save();
 
-        toast('Topik berhasil di-' . ($this->post->is_pinned ? 'pin' : 'unpin') . '.', 'success');
+        toast('Topik berhasil di-'.($this->post->is_pinned ? 'pin' : 'unpin').'.', 'success');
     }
 
     public function deleteComment($commentId)
@@ -142,10 +145,10 @@ class PostDetail extends Component
     public function toggleAsBest($commentId)
     {
         $comment = $this->post->comments()->find($commentId);
-        $comment->is_best = !$comment->is_best;
+        $comment->is_best = ! $comment->is_best;
         $comment->save();
 
-        toast('Komentar berhasil di-' . ($comment->is_best ? 'jadikan jawaban terbaik' : 'hapus jawaban terbaik') . '.', 'success');
+        toast('Komentar berhasil di-'.($comment->is_best ? 'jadikan jawaban terbaik' : 'hapus jawaban terbaik').'.', 'success');
     }
 
     public function render()

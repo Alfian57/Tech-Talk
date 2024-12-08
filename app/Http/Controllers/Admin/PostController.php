@@ -30,6 +30,7 @@ class PostController extends Controller
         ]);
 
         toast('Topik berhasil dipin', 'success');
+
         return redirect()->back();
     }
 
@@ -40,6 +41,7 @@ class PostController extends Controller
         ]);
 
         toast('Topik berhasil diunpin', 'success');
+
         return redirect()->back();
     }
 
@@ -50,6 +52,7 @@ class PostController extends Controller
         ]);
 
         toast('Topik berhasil dibuka', 'success');
+
         return redirect()->back();
     }
 
@@ -60,6 +63,7 @@ class PostController extends Controller
         ]);
 
         toast('Topik berhasil ditutup', 'success');
+
         return redirect()->back();
     }
 
@@ -68,6 +72,7 @@ class PostController extends Controller
         $post->delete();
 
         toast('Topik berhasil dihapus', 'success');
+
         return redirect()->route('dashboard.posts.index');
     }
 }

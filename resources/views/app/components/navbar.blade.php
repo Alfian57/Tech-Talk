@@ -29,13 +29,6 @@
                 <div class="tt-account-btn">
                     @if (auth()->check())
                         <div class="tt-user-info d-flex justify-content-center align-items-center">
-                            <a href="#" class="tt-btn-icon">
-                                <i class="tt-icon">
-                                    <svg>
-                                        <use xlink:href="#icon-notification"></use>
-                                    </svg>
-                                </i>
-                            </a>
                             <div class="tt-avatar-icon tt-size-md d-flex align-items-center">
                                 <a href="{{ route('profile.index') }}">
                                     <i class="tt-icon">

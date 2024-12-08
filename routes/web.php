@@ -31,7 +31,6 @@ Route::middleware('roles:user|moderator')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 });
 
-
 Route::prefix('dashboard')->as('dashboard.')->middleware('roles:admin')->group(function () {
     Route::get('/index', [DashboardController::class, 'index'])->name('index');
 

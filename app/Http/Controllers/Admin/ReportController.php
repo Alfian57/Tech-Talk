@@ -11,7 +11,7 @@ class ReportController extends Controller
     {
         return view('dashboard.pages.report.index', [
             'title' => 'List Laporan',
-            'reports' => Report::where('status', 'opened')->with('user')->latest()->get()
+            'reports' => Report::where('status', 'opened')->with('user')->latest()->get(),
         ]);
     }
 
@@ -19,7 +19,7 @@ class ReportController extends Controller
     {
         return view('dashboard.pages.report.show', [
             'title' => 'Detail Laporan',
-            'report' => $report
+            'report' => $report,
         ]);
     }
 
@@ -28,6 +28,7 @@ class ReportController extends Controller
         $report->update(['status' => 'closed']);
 
         toast('Laporan berhasil ditutup', 'success');
+
         return redirect()->back();
     }
 }

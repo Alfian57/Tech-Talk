@@ -12,14 +12,14 @@ class CategoryController extends Controller
     {
         return view('dashboard.pages.category.index', [
             'title' => 'List Kategori',
-            'categories' => Category::latest()->get()
+            'categories' => Category::latest()->get(),
         ]);
     }
 
     public function create()
     {
         return view('dashboard.pages.category.create', [
-            'title' => 'Tambah Kategori'
+            'title' => 'Tambah Kategori',
         ]);
     }
 
@@ -27,12 +27,13 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
         ]);
 
         Category::create($validatedData);
 
         toast('Kategori berhasil ditambahkan', 'success');
+
         return redirect()->route('dashboard.categories.index');
     }
 
@@ -40,7 +41,7 @@ class CategoryController extends Controller
     {
         return view('dashboard.pages.category.edit', [
             'title' => 'Edit Kategori',
-            'category' => $category
+            'category' => $category,
         ]);
     }
 
@@ -48,12 +49,13 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
         ]);
 
         $category->update($validatedData);
 
         toast('Kategori berhasil diubah', 'success');
+
         return redirect()->route('dashboard.categories.index');
     }
 
@@ -62,6 +64,7 @@ class CategoryController extends Controller
         $category->delete();
 
         toast('Kategori berhasil dihapus', 'success');
+
         return redirect()->route('dashboard.categories.index');
     }
 }

@@ -12,7 +12,7 @@ class ReactionObserver
         UserLog::create([
             'user_id' => $reaction->user_id,
             'action' => 'reaction-create',
-            'description' => 'User memberikan reaksi ' . $reaction->type . ' pada ' . ($reaction->comment_id ? 'komentar' : 'postingan') . ' dengan id: ' . ($reaction->comment_id ? $reaction->comment_id : $reaction->post_id),
+            'description' => 'User memberikan reaksi '.$reaction->type.' pada '.($reaction->comment_id ? 'komentar' : 'postingan').' dengan id: '.($reaction->comment_id ? $reaction->comment_id : $reaction->post_id),
         ]);
     }
 
@@ -21,7 +21,7 @@ class ReactionObserver
         UserLog::create([
             'user_id' => $reaction->user_id,
             'action' => 'reaction-update',
-            'description' => 'User mengubah reaksi ' . $reaction->type . ' pada ' . ($reaction->comment_id ? 'komentar' : 'postingan') . ' dengan id: ' . ($reaction->comment_id ? $reaction->comment_id : $reaction->post_id),
+            'description' => 'User mengubah reaksi '.$reaction->type.' pada '.($reaction->comment_id ? 'komentar' : 'postingan').' dengan id: '.($reaction->comment_id ? $reaction->comment_id : $reaction->post_id),
         ]);
     }
 
@@ -30,7 +30,7 @@ class ReactionObserver
         UserLog::create([
             'user_id' => $reaction->user_id,
             'action' => 'reaction-delete',
-            'description' => 'User menghapus reaksi ' . $reaction->type . ' pada ' . ($reaction->comment_id ? 'komentar' : 'postingan') . ' dengan id: ' . ($reaction->comment_id ? $reaction->comment_id : $reaction->post_id),
+            'description' => 'User menghapus reaksi '.$reaction->type.' pada '.($reaction->comment_id ? 'komentar' : 'postingan').' dengan id: '.($reaction->comment_id ? $reaction->comment_id : $reaction->post_id),
         ]);
     }
 }
