@@ -33,7 +33,7 @@ class HomeController extends Controller
                     return $query->where('category_id', request('category'));
                 })
                 ->latest()
-                ->paginate(),
+                ->simplepaginate(),
         ]);
     }
 

@@ -124,9 +124,7 @@
 
 
         <div class="tt-row-btn">
-            <button type="button" class="btn-icon js-topiclist-showmore">
-                {{ $posts->links() }}
-            </button>
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection

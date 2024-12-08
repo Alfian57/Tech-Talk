@@ -34,7 +34,7 @@ class CategoryList extends Component
                 ->where('name', 'like', "%{$this->search}%")
                 ->withCount('users')
                 ->latest()
-                ->paginate(),
+                ->simplepaginate(),
         ]);
     }
 }

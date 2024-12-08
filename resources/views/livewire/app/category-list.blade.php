@@ -58,7 +58,7 @@
                 </div>
             @endforeach
         </div>
-        <div>
+        <div class="tt-row-btn">
             {{ $categories->links() }}
         </div>
         @if ($categories->isEmpty())
