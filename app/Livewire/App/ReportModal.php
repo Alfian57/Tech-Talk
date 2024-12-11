@@ -34,6 +34,7 @@ class ReportModal extends Component
 
     public function submit()
     {
+        $this->checkAuth();
         $this->validate([
             'content' => 'required|min:10',
         ]);
@@ -52,6 +53,13 @@ class ReportModal extends Component
         toast('Laporan berhasil dikirim.', 'success');
 
         return $this->redirect(route('posts.index', $this->currentPost->id));
+    }
+
+    private function checkAuth()
+    {
+        if (! Auth::check()) {
+            return $this->redirect(route('login'));
+        }
     }
 
     public function render()
