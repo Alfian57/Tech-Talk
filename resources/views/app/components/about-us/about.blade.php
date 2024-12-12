@@ -26,7 +26,9 @@
                                         @php
                                             $letter = strtolower($post->user->name[0]);
                                         @endphp
-                                        <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                                        <svg class="tt-icon">
+                                            <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                                        </svg>
                                     @endif
                                 </div>
                                 <div class="tt-col-description">
@@ -55,7 +57,9 @@
                                         @php
                                             $letter = strtolower($post->user->name[0]);
                                         @endphp
-                                        <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                                        <svg class="tt-icon">
+                                            <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                                        </svg>
                                     @endif
                                 </div>
                                 <div class="tt-col-description">

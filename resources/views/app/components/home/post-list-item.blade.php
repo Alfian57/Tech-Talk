@@ -10,7 +10,9 @@
                 @php
                     $letter = strtolower($user_name[0]);
                 @endphp
-                <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                <svg class="tt-icon">
+                    <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                </svg>
             @endif
         </svg>
     </div>
