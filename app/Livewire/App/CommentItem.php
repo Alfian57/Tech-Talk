@@ -24,19 +24,25 @@ class CommentItem extends Component
 
     public function like($commentId = null)
     {
-        $this->checkAuth();
+        if (! Auth::check()) {
+            return $this->redirect(route('login'));
+        }
         $this->updateCommentReaction('like', $commentId);
     }
 
     public function dislike($commentId = null)
     {
-        $this->checkAuth();
+        if (! Auth::check()) {
+            return $this->redirect(route('login'));
+        }
         $this->updateCommentReaction('dislike', $commentId);
     }
 
     public function report($id)
     {
-        $this->checkAuth();
+        if (! Auth::check()) {
+            return $this->redirect(route('login'));
+        }
         $this->dispatch('set-report-modal', $id, 'comment');
     }
 
@@ -92,13 +98,6 @@ class CommentItem extends Component
             ]);
         }
         $comment->save();
-    }
-
-    private function checkAuth()
-    {
-        if (! Auth::check()) {
-            return $this->redirect(route('login'));
-        }
     }
 
     public function render()

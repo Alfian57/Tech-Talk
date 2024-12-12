@@ -12,13 +12,17 @@ class PostInteraction extends Component
 
     public function like()
     {
-        $this->checkAuth();
+        if (! Auth::check()) {
+            return $this->redirect(route('login'));
+        }
         $this->updateReaction('like');
     }
 
     public function dislike()
     {
-        $this->checkAuth();
+        if (! Auth::check()) {
+            return $this->redirect(route('login'));
+        }
         $this->updateReaction('dislike');
     }
 
@@ -70,13 +74,6 @@ class PostInteraction extends Component
                 'post_id' => $this->post->id,
                 'type' => $type,
             ]);
-        }
-    }
-
-    private function checkAuth()
-    {
-        if (! Auth::check()) {
-            return $this->redirect(route('login'));
         }
     }
 
