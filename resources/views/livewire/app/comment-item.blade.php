@@ -1,5 +1,14 @@
 @props(['is_last_comment' => false, 'comment'])
 
+@push('styles')
+    <style>
+        .tt-item-description iframe {
+            width: 100% !important;
+            aspect-ratio: 1/1 !important;
+        }
+    </style>
+@endpush
+
 <div @class([
     'tt-item',
     'tt-wrapper-success' => $comment->is_best,
@@ -7,42 +16,46 @@
 ])>
     <div class="tt-single-topic">
         <div class="tt-item-header pt-noborder">
-            <div class="tt-item-info info-top">
-                <div class="tt-avatar-icon">
-                    @if ($comment->user->profile_picture)
-                        <img src="{{ asset('storage/' . $comment->user->profile_picture) }}"
-                            alt="{{ $comment->user->name }}" class="img-fluid"
-                            style="width: 40px; height: 40px; border-radius: 50%;">
-                    @else
-                        @php
-                            $letter = strtolower($comment->user->name[0]);
-                        @endphp
-                        <use xlink:href="#icon-ava-{{ $letter }}"></use>
-                    @endif
+            <div class="tt-item-info info-top comment-header">
+                <div>
+                    <div class="tt-avatar-icon">
+                        @if ($comment->user->profile_picture)
+                            <img src="{{ asset('storage/' . $comment->user->profile_picture) }}"
+                                alt="{{ $comment->user->name }}" class="img-fluid"
+                                style="width: 40px; height: 40px; border-radius: 50%;">
+                        @else
+                            @php
+                                $letter = strtolower($comment->user->name[0]);
+                            @endphp
+                            <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                        @endif
+                    </div>
+                    <div class="tt-avatar-title">
+                        <a href="javascript:void(0);">{{ $comment->user->name }}</a>
+                    </div>
                 </div>
-                <div class="tt-avatar-title">
-                    <a href="javascript:void(0);">{{ $comment->user->name }}</a>
+                <div>
                     @if ($comment->is_best)
                         <span class="tt-color13 tt-badge">jawaban terbaik</span>
                     @endif
-                </div>
-                <a href="javascript:void(0);" class="tt-info-time">
-                    @if (auth()->id() === $comment->user_id)
-                        <i class="tt-icon" wire:click="toggleEdit">
+                    <a href="javascript:void(0);" class="tt-info-time">
+                        @if (auth()->id() === $comment->user_id)
+                            <i class="tt-icon" wire:click="toggleEdit">
+                                <svg>
+                                    <use xlink:href="#icon-pencil"></use>
+                                </svg>
+                            </i>
+                        @endif
+                        <i class="tt-icon">
                             <svg>
-                                <use xlink:href="#icon-pencil"></use>
+                                <use xlink:href="#icon-time"></use>
                             </svg>
                         </i>
-                    @endif
-                    <i class="tt-icon">
-                        <svg>
-                            <use xlink:href="#icon-time"></use>
-                        </svg>
-                    </i>
-                    <span @if ($comment->created_at->diffInMinutes() < 1) wire:poll.1s @endif>
-                        {{ $comment->created_at->diffForHumans() }}
-                    </span>
-                </a>
+                        <span @if ($comment->created_at->diffInMinutes() < 1) wire:poll.1s @endif>
+                            {{ $comment->created_at->diffForHumans() }}
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="tt-item-description">
