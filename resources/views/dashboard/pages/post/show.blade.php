@@ -17,7 +17,9 @@
             <p class="card-text">Kategori: {{ $post->category->name }}</p>
             <p class="card-text">{{ $post->created_at->format('d M Y') }}</p>
 
-            <p>{{ $post->content }}</p>
+            <div>
+                {!! $post->content !!}
+            </div>
 
             <div class="d-flex justify-content-end mt-3">
                 <a href="{{ route('dashboard.posts.index') }}" class="btn btn-primary mx-1">Kembali</a>

@@ -27,6 +27,7 @@
 
     <div class="rightbar-overlay"></div>
 
+    @include('dashboard.components.theme')
     @include('dashboard.components.scripts')
 
 

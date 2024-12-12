@@ -8,7 +8,7 @@
     @elseif(auth()->check())
         <form wire:submit.prevent="addComment" style="width: 100%;">
             <div class="form-group" style="width: 100%;">
-                <textarea class="form-control" rows="5" wire:model="content" placeholder="Tambahkan komentar..." style="width: 100%;"></textarea>
+                <livewire:jodit-text-editor wire:model.live="content" placeholder="dasdj" />
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary mt-2">Kirim</button>

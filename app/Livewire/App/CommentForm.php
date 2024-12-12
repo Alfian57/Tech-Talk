@@ -26,8 +26,9 @@ class CommentForm extends Component
             'content' => $this->content,
         ]);
 
-        $this->reset('content');
-        $this->dispatch('refresh-post-detail-page');
+        toast('Komentar berhasil ditambahkan', 'success');
+
+        return $this->redirect(route('posts.index', $this->post->id));
     }
 
     public function checkAuth()

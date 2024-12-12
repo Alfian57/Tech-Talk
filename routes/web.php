@@ -26,7 +26,6 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('roles:user|moderator')->group(function () {
     Route::get('/posts/create', [AppPostController::class, 'create'])->name('posts.create');
-    Route::post('/posts', [AppPostController::class, 'store'])->name('posts.store');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 });

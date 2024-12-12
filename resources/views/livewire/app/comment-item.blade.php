@@ -27,6 +27,13 @@
                     @endif
                 </div>
                 <a href="javascript:void(0);" class="tt-info-time">
+                    @if (auth()->id() === $comment->user_id)
+                        <i class="tt-icon" wire:click="toggleEdit">
+                            <svg>
+                                <use xlink:href="#icon-pencil"></use>
+                            </svg>
+                        </i>
+                    @endif
                     <i class="tt-icon">
                         <svg>
                             <use xlink:href="#icon-time"></use>
@@ -39,7 +46,20 @@
             </div>
         </div>
         <div class="tt-item-description">
-            {{ $comment->content }}
+            @if ($isEdit)
+                <form wire:submit.prevent="edit">
+                    <livewire:jodit-text-editor wire:model="new_comment" />
+                    @error('new_comment')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-secondary btn-width-lg">Ubah</button>
+                    </div>
+                </form>
+            @else
+                {!! $comment->content !!}
+            @endif
         </div>
         <div class="tt-item-info info-bottom">
             <a href="javascript:void(0);" class="tt-icon-btn" wire:click="like({{ $comment->id }})">

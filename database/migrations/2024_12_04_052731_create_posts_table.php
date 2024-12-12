@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->longText('content');
             $table->boolean('is_pinned')->default(false);
             $table->boolean('is_closed')->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

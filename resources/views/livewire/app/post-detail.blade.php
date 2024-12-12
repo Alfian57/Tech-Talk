@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="tt-item-description">
-                {{ $post->content }}
+                {!! $post->content !!}
             </div>
             <livewire:app.post-interaction :post="$post" />
         </div>

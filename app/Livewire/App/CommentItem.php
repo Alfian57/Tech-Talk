@@ -13,6 +13,15 @@ class CommentItem extends Component
 
     public Comment $comment;
 
+    public bool $isEdit = false;
+
+    public string $new_comment;
+
+    public function mount()
+    {
+        $this->new_comment = $this->comment->content;
+    }
+
     public function like($commentId = null)
     {
         $this->checkAuth();
@@ -51,6 +60,22 @@ class CommentItem extends Component
         }
 
         $refresh = true;
+    }
+
+    public function toggleEdit()
+    {
+        $this->isEdit = ! $this->isEdit;
+    }
+
+    public function edit()
+    {
+        $this->validate([
+            'new_comment' => 'required|min:5',
+        ]);
+        $this->comment->update([
+            'content' => $this->new_comment,
+        ]);
+        $this->isEdit = false;
     }
 
     private function updateCommentReaction($type, $commentId)
