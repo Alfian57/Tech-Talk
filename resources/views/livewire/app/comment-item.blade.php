@@ -1,13 +1,52 @@
 @props(['is_last_comment' => false, 'comment'])
 
-@push('styles')
-    <style>
-        .tt-item-description iframe {
-            width: 100% !important;
-            aspect-ratio: 1/1 !important;
-        }
-    </style>
-@endpush
+@once
+    @push('styles')
+        <style>
+            .tt-item-description iframe {
+                width: 100% !important;
+                aspect-ratio: 1/1 !important;
+            }
+
+            .comment-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center
+            }
+
+            .comment-header .comment-detail {
+                order: 1;
+            }
+
+            .comment-header .comment-info {
+                order: 2;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            @media(max-width: 767px) {
+                .comment-header {
+                    flex-direction: column !important;
+                }
+
+                .comment-header .comment-detail {
+                    order: 2;
+                    display: flex;
+                    align-items: center;
+                    align-self: flex-start;
+                    padding-top: 15px;
+                }
+
+                .comment-header .comment-info {
+                    order: 1;
+                    align-items: center;
+                    align-self: flex-end;
+                }
+            }
+        </style>
+    @endpush
+@endonce
 
 <div @class([
     'tt-item',
@@ -17,7 +56,7 @@
     <div class="tt-single-topic">
         <div class="tt-item-header pt-noborder">
             <div class="tt-item-info info-top comment-header">
-                <div>
+                <div class="comment-detail">
                     <div class="tt-avatar-icon">
                         @if ($comment->user->profile_picture)
                             <img src="{{ asset('storage/' . $comment->user->profile_picture) }}"
@@ -34,7 +73,7 @@
                         <a href="javascript:void(0);">{{ $comment->user->name }}</a>
                     </div>
                 </div>
-                <div>
+                <div class="comment-info">
                     @if ($comment->is_best)
                         <span class="tt-color13 tt-badge">jawaban terbaik</span>
                     @endif
@@ -117,23 +156,32 @@
                 <span class="tt-text">Laporkan</span>
             </a>
             @if (auth()->id() === $comment->user_id || auth()->user()?->role === 'moderator')
-                @if (!$comment->is_best)
-                    <a href="javascript:void(0);" wire:click="toggleAsBest('{{ $comment->id }}')">
-                        <span style="color: green; margin-left: 30px; font-weight: bold;">Jadikan Jawaban
-                            Terbaik
-                        </span>
-                    </a>
-                @else
-                    <a href="javascript:void(0);" wire:click="toggleAsBest('{{ $comment->id }}')">
-                        <span style="color: orange; margin-left: 30px; font-weight: bold;">Batalkan Jawaban
-                            Terbaik
-                        </span>
-                    </a>
-                @endif
+                <a href="javascript:void(0);" class="tt-icon-btn" wire:click="toggleAsBest('{{ $comment->id }}')">
+                    @if (!$comment->is_best)
+                        <i class="tt-icon">
+                            <svg>
+                                <use xlink:href="#icon-favorite"></use>
+                            </svg>
+                        </i>
+                        <span class="tt-text">Jawaban Terbaik</span>
+                    @else
+                        <i class="tt-icon">
+                            <svg>
+                                <use xlink:href="#icon-unfavorite"></use>
+                            </svg>
+                        </i>
+                        <span class="tt-text">Batalkan yang Terbaik</span>
+                    @endif
+                </a>
             @endif
-            @if (auth()->user()?->role === 'moderator')
-                <a href="javascript:void(0);" wire:click="delete({{ $comment->id }})">
-                    <span style="color: red; margin-left: 30px; font-weight: bold;">Hapus Komentar</span>
+            @if (auth()->user()?->role === 'moderator' || auth()->id() === $comment->user_id)
+                <a href="javascript:void(0);" class="tt-icon-btn" wire:click="delete({{ $comment->id }})">
+                    <i class="tt-icon">
+                        <svg>
+                            <use xlink:href="#icon-cancel"></use>
+                        </svg>
+                    </i>
+                    <span class="tt-text">Hapus Komentar</span>
                 </a>
             @endif
         </div>

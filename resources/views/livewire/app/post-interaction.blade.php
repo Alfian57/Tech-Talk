@@ -74,8 +74,13 @@
         </a>
     @endif
     @if (auth()->id() === $post->user_id || auth()->user()?->role === 'moderator')
-        <a href="javascript:void(0);" wire:click="deletePost">
-            <span style="color: red; margin-left: 30px; font-weight: bold;">Hapus Topik</span>
+        <a href="javascript:void(0);" class="tt-icon-btn" wire:click="deletePost">
+            <i class="tt-icon">
+                <svg>
+                    <use xlink:href="#icon-cancel"></use>
+                </svg>
+            </i>
+            <span class="tt-text">Hapus Topik</span>
         </a>
     @endif
     <div class="col-separator"></div>

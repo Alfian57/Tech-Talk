@@ -1,24 +1,75 @@
+@push('styles')
+    <style>
+        .post-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .post-detail div {
+            order: 1;
+        }
+
+        .post-detail a {
+            order: 2;
+        }
+
+        .tt-avatar-title {
+            padding-top: 0;
+        }
+
+        @media (max-width: 767px) {
+
+            .post-detail {
+                flex-direction: column !important;
+            }
+
+            .post-detail div {
+                order: 2;
+                display: flex;
+                align-items: center;
+                align-self: flex-start;
+                padding-top: 15px;
+            }
+
+            .post-detail a {
+                order: 1;
+                display: flex;
+                align-items: center;
+                align-self: flex-end;
+            }
+
+            .tt-avatar-title {
+                padding-top: 7px;
+            }
+        }
+    </style>
+@endpush
+
 <div class="tt-single-topic-list pt-3">
     <div class="tt-item">
         <div class="tt-single-topic">
             <div class="tt-item-header">
-                <div class="tt-item-info info-top">
-                    <div class="tt-avatar-icon">
-                        @if ($post->user->profile_picture)
-                            <img src="{{ asset('storage/' . $post->user->profile_picture) }}"
-                                alt="{{ $post->user->name }}" class="img-fluid"
-                                style="width: 40px; height: 40px; border-radius: 50%;">
-                        @else
-                            @php
-                                $letter = strtolower($post->user->name[0]);
-                            @endphp
-                            <svg class="tt-icon">
-                                <use xlink:href="#icon-ava-{{ $letter }}"></use>
-                            </svg>
-                        @endif
-                    </div>
-                    <div class="tt-avatar-title">
-                        <a href="javascript:void(0);">{{ $post->user->name }}</a>
+                <div class="tt-item-info info-top post-detail">
+                    <div>
+                        <div class="tt-avatar-icon">
+                            @if ($post->user->profile_picture)
+                                <img src="{{ asset('storage/' . $post->user->profile_picture) }}"
+                                    alt="{{ $post->user->name }}" class="img-fluid"
+                                    style="width: 40px; height: 40px; border-radius: 50%;">
+                            @else
+                                @php
+                                    $letter = strtolower($post->user->name[0]);
+                                @endphp
+                                <svg class="tt-icon">
+                                    <use xlink:href="#icon-ava-{{ $letter }}"></use>
+                                </svg>
+                            @endif
+                        </div>
+                        <div class="tt-avatar-title">
+                            <a href="javascript:void(0);">{{ $post->user->name }}</a>
+                        </div>
                     </div>
                     <a href="javascript:void(0);" class="tt-info-time">
                         @if ($post->is_pinned)

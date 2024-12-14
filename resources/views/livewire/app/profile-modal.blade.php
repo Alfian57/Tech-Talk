@@ -35,9 +35,8 @@
                          @endif
                      </div>
                  </div>
-                 <div class="form-group">
-                     <input type="file" class="form-control" name="profile_picture" id=""
-                         wire:model="profile_picture">
+                 <div class="form-group" style="margin-top: 10px;">
+                     <input type="file" class="form-control" name="profile_picture" wire:model="profile_picture">
                      @error('profile_picture')
                          <span class="text-danger">{{ $message }}</span>
                      @enderror

@@ -47,8 +47,8 @@
                                     </i>
                                 </a>
                             </div>
-                            <a href="{{ route('profile.index') }}">
-                                <h4>{{ auth()->user()->name }}</h4>
+                            <a href="{{ route('profile.index') }}" style="margin-top: 7px; margin-left: 10px">
+                                <h4>{{ Str::limit(auth()->user()->name, 10) }}</h4>
                             </a>
                         </div>
                     @else

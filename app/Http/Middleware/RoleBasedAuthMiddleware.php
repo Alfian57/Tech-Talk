@@ -27,6 +27,10 @@ class RoleBasedAuthMiddleware
             }
         }
 
-        abort(403);
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('dashboard.index');
+        }
+
+        return redirect()->route('home');
     }
 }

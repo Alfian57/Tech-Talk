@@ -34,10 +34,13 @@
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="{{ route('dashboard.profile.index') }}">
+                        <i class="mdi mdi-account-circle font-size-16 align-middle me-1"></i> Profil
+                    </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="dropdown-item text-danger">
-                            <i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout
+                            <i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Keluar
                         </button>
                     </form>
                 </div>
