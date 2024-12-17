@@ -4,9 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\Report;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -30,21 +27,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-        ]);
-
-        Category::factory()
-            ->count(20)
-            ->create();
-
-        Post::factory()
-            ->count(1000)
-            ->create();
-
-        Report::factory()
-            ->count(20)
-            ->create();
-
-        $this->call([
+            CategorySeeder::class,
+            PostSeeder::class,
+            ReportSeeder::class,
             UserCategorySeeder::class,
         ]);
     }

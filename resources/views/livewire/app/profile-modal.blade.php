@@ -84,7 +84,10 @@
          </div>
          <span class="text-primary">*Kosongkan password jika tidak ingin mengubah</span>
          <div class="form-group">
-             <button type="submit" class="btn btn-secondary">Ubah</button>
+             <button type="submit" class="btn btn-secondary" wire:loading.attr="disabled" wire:loading.class="loading">
+                 <span wire:loading.remove>Ubah</span>
+                 <span wire:loading>Loading...</span>
+             </button>
          </div>
      </form>
  </div>

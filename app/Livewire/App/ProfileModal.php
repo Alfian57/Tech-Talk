@@ -50,7 +50,8 @@ class ProfileModal extends Component
         $user->bio = $this->bio;
 
         if ($this->profile_picture) {
-            $user->profile_picture = $this->profile_picture->store('images/profile-pic', 'public');
+            $path = $this->profile_picture->store('images/profile-pic', 'public');
+            $user->profile_picture = $path;
         }
 
         if ($this->password) {
