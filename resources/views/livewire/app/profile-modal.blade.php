@@ -1,4 +1,4 @@
- <div id="js-popup-settings" class="tt-popup-settings">
+ <div id="js-popup-settings" class="tt-popup-settings" wire:ignore.self>
      <div class="tt-btn-col-close">
          <a href="#">
              <span class="tt-icon-title">
@@ -36,7 +36,8 @@
                      </div>
                  </div>
                  <div class="form-group" style="margin-top: 10px;">
-                     <input type="file" class="form-control" name="profile_picture" wire:model="profile_picture">
+                     <input type="file" class="form-control" name="profile_picture"
+                         wire:model.live="profile_picture">
                      @error('profile_picture')
                          <span class="text-danger">{{ $message }}</span>
                      @enderror
