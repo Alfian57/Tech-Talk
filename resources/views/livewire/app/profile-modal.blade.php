@@ -16,10 +16,11 @@
              </span>
          </a>
      </div>
-     <form class="form-default" wire:submit.prevent="update">
+     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+         @csrf
          <div class="tt-form-upload">
-             <div class="row no-gutter">
-                 <div class="col-auto">
+             <div class="row no-gutter" style="align-items: center !important;">
+                 <div class="col-2">
                      <div class="tt-avatar">
                          @if (auth()->user()->profile_picture)
                              <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}"
@@ -35,15 +36,23 @@
                          @endif
                      </div>
                  </div>
-                 <div class="form-group" style="margin-top: 10px;">
-                     <input type="file" class="form-control" name="profile_picture"
-                         wire:model.live="profile_picture">
-                     @error('profile_picture')
-                         <span class="text-danger">{{ $message }}</span>
-                     @enderror
+                 <div class="col-10">
+                     <div class="form-group" style="margin-top: 10px;">
+                         <input type="file" class="form-control" name="profile_picture"
+                             wire:model.live="profile_picture">
+                         @error('profile_picture')
+                             <span class="text-danger">{{ $message }}</span>
+                         @enderror
+                     </div>
                  </div>
              </div>
+
+             <div class="row justify-content-end">
+                 <button type="submit" class="btn btn-secondary btn-sm mt-3">Ubah Foto</button>
+             </div>
          </div>
+     </form>
+     <form class="form-default" wire:submit.prevent="update">
          <div class="form-group">
              <label for="name">Nama</label>
              <input type="text" name="name" class="form-control" id="name" placeholder="user"
@@ -85,10 +94,13 @@
          </div>
          <span class="text-primary">*Kosongkan password jika tidak ingin mengubah</span>
          <div class="form-group">
-             <button type="submit" class="btn btn-secondary" wire:loading.attr="disabled" wire:loading.class="loading">
-                 <span wire:loading.remove>Ubah</span>
-                 <span wire:loading>Loading...</span>
-             </button>
+             <div class="row justify-content-end">
+                 <button type="submit" class="btn btn-sm btn-secondary" wire:loading.attr="disabled"
+                     wire:loading.class="loading">
+                     <span wire:loading.remove>Ubah Profil</span>
+                     <span wire:loading>Loading...</span>
+                 </button>
+             </div>
          </div>
      </form>
  </div>

@@ -22,7 +22,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/update-profile', [AppProfileController::class, 'updateProfile'])->name('profile.update');
 });
 
 Route::middleware('roles:user|moderator')->group(function () {
